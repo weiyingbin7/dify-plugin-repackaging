@@ -48,12 +48,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-
-      # 新增的步骤：安装系统依赖
-      - name: Install system dependencies for building packages
+          
+      - name: Fix greenlet version in requirements
         run: |
-          sudo apt-get update
-          sudo apt-get install -y build-essential python3-dev
+          if [ -f market/requirements.txt ]; then
+            sed -i 's/greenlet==3.4.0/greenlet>=3.0.0/g' market/requirements.txt
+            echo "✅ 已成功将 greenlet==3.4.0 替换为 greenlet>=3.0.0"
+            grep greenlet market/requirements.txt
+          else
+            echo "⚠️ 未找到 requirements.txt，请检查插件路径！"
+          fi
 
       - name: Make plugin_repackaging.sh executable
         run: chmod +x ./plugin_repackaging.sh
