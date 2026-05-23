@@ -51,10 +51,10 @@ jobs:
           
       - name: Fix greenlet version in requirements
         run: |
-          if [ -f market/requirements.txt ]; then
-            sed -i 's/greenlet==3.4.0/greenlet>=3.0.0/g' market/requirements.txt
+          if [ -f requirements.txt ]; then
+            sed -i 's/greenlet==3.4.0/greenlet>=3.0.0/g' requirements.txt
             echo "✅ 已成功将 greenlet==3.4.0 替换为 greenlet>=3.0.0"
-            grep greenlet market/requirements.txt
+            grep greenlet requirements.txt
           else
             echo "⚠️ 未找到 requirements.txt，请检查插件路径！"
           fi
