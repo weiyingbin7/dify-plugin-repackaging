@@ -318,6 +318,8 @@ PY
 	elif [ -f "requirements.txt" ]; then
 		echo "✓ Using existing requirements.txt"
 	fi
+	
+	sed -i 's/greenlet==3.4.0/greenlet>=3.0.0/g' requirements.txt
 
 	[ ! -f "requirements.txt" ] && echo "✗ Error: requirements.txt not found" && exit 1
 
